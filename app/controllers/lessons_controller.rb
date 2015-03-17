@@ -1,20 +1,24 @@
 class LessonsController < ApplicationController
   def index
+    @section = Section.find(params[:section_id])
     @lessons = Lesson.all
   end
 
   def show
+    @section = Section.find(params[:section_id])
     @lesson = Lesson.find(params[:id])
   end
 
   def new
-    @lesson = Lesson.new
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.new
   end
 
   def create
-    @lesson = Lesson.new(lesson_params)
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.new(lesson_params)
     if @lesson.save
-      redirect_to lessons_path
+      redirect_to section_path(@lesson.section)
       flash[:notice] = "The " + @lesson.name + " was successfully created."
     else
       render :new
@@ -22,11 +26,13 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    @lesson = Lesson.find(params[:id])
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.find(params[:id])
   end
 
   def update
-    @lesson = Lesson.find(params[:id])
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.find(params[:id])
     if @lesson.update(lesson_params)
       redirect_to lesson_path(@lesson)
       flash[:notice] = "The " + @lesson.name + " was successfully updated."
@@ -36,9 +42,10 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    @lesson = Lesson.find(params[:id])
+    @section = Section.find(params[:section_id])
+    @lesson = @section.lessons.find(params[:id])
     @lesson.destroy
-    redirect_to lessons_path
+    redirect_to sections_path
     flash[:notice] = "The " + @lesson.name + " was successfully deleted."
   end
 

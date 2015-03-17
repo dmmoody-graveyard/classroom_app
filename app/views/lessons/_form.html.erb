@@ -1,6 +1,6 @@
 <%= render 'layouts/errors', :object => @lesson %>
 
-<%= form_for @lesson do |f| %>
+<%= form_for [@section, @lesson] do |f| %>
   <%= f.label :number %>
   <%= f.number_field :number %>
   <%= f.label :name %>

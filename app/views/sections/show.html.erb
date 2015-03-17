@@ -6,6 +6,18 @@
   <%= @section.description %>
 </p>
 
+<h4>Lessons in this Section</h4>
+
+<ul>
+  <% @section.lessons.each do |lesson| %>
+  <li><%= lesson.number %> | <%= link_to lesson.name, section_lesson_path %></li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to "Create a New Lesson", new_section_lesson_path(@section) %>
+</p>
+
 <p>
   <%= link_to 'Update this section', edit_section_path(@section) %>
 </p>
