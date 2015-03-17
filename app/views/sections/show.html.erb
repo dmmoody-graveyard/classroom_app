@@ -1,0 +1,21 @@
+<% content_for(:title, "Section | Learn to Program") %>
+
+<h1><%=   @section.name %></h1>
+
+<p>
+  <%= @section.description %>
+</p>
+
+<p>
+  <%= link_to 'Update this section', edit_section_path(@section) %>
+</p>
+
+<p>
+  <%= link_to "Delete this section", section_path(@section),
+                                          :data => {:confirm => "Are you sure?",
+                                                    :method => 'delete'} %>
+</p>
+
+<p>
+  <%= link_to 'Return to sections list', sections_path %>
+</p>
